@@ -1,0 +1,17 @@
+https://www.kaggle.com/c/churn-prediction
+
+The aim of this competition is to determine weather a customer will churn using usage detail.
+
+Since this is a binary-class problem, you are expected to try linear regression and random forests, and try to minimize the log loss.
+
+In this competition you are provided with pre-processed data. Your data will have a dimension of N x 8.
+
+Fields:
+Customer_ID: Unique ID for each customer.
+Sessions: Connection details for sessions.
+Cell_ID: Cell in which device is being used.
+District_ID: District where device is being used.
+Complaints_U: Complaint feature 1.
+Complaints_R: Complaint feature 2.
+Complaints_W: Complaint feature 3.
+Label
