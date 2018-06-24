@@ -6,7 +6,8 @@ import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
-from sklearn.metrics import precision_score, recall_score, roc_auc_score, fbeta_score
+from sklearn.metrics import precision_score, recall_score, roc_auc_score, fbeta_score 
+from sklearn.metrics import brier_score_loss
 
 from datetime import datetime
 
@@ -19,6 +20,7 @@ class model_training_eval:
         self.cls_precision = []
         self.cls_recall = []
         self.cls_f1 = []
+        self.cls_brier = []
         self.cls_exec_time = []
         self.cls_hpt_time = []
 
@@ -89,6 +91,7 @@ class model_training_eval:
         self.cls_precision.append(precision_score(self.y_test, y_pred_class))
         self.cls_recall.append(recall_score(self.y_test, y_pred_class))
         self.cls_f1.append(fbeta_score(self.y_test, y_pred_class, 2.0))
+        self.cls_brier.append(brier_score_loss(self.y_test, y_pred_proba))
         self.cls_exec_time.append(exec_time)
         self.cls_hpt_time.append(hpt_time)
 
@@ -99,12 +102,12 @@ class model_training_eval:
 
         measurement = [
             'roc_auc_score', 'precision_score', 'recall_score', 'fbeta_score',
-            'execusion_time', 'hpt_time'
+            'brier_score_loss','execusion_time', 'hpt_time'
         ]
         df_comparason = pd.DataFrame(
             data=[
                 self.cls_roc, self.cls_precision, self.cls_recall, self.cls_f1,
-                self.cls_exec_time, self.cls_hpt_time
+                self.cls_brier, self.cls_exec_time, self.cls_hpt_time
             ],
             index=measurement,
             columns=self.cls_name).T
